@@ -7,8 +7,8 @@
     <title>Ross Swanson | Front End Developer Programming Challenge</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
     <style>
         /* TODO: Add styles */
         html, body, *, *::before, *::after {
@@ -55,7 +55,7 @@
         }
         .subhead-container h2 {
             color: #FFF;
-            letter-spacing: 1.2px;
+            letter-spacing: 1px;
             font-weight: 400;
             font-size: 18px;
         }
@@ -64,6 +64,7 @@
             display: grid;
             grid-template-columns: 1fr;
             gap: 10px;
+            padding: 40px 0 100px 0;
             margin: 0 auto;
         }
 
@@ -76,7 +77,16 @@
             text-align: center;
         }
 
+        #products-container article p.category{
+            font-size: 16px;
+        }
+
+        #products-container article h3{
+            font-size: 24px;
+        }
+
         .price-container {
+            margin-top: 15px;
             display: flex;
             justify-content: center;
         }
@@ -93,12 +103,19 @@
             #products-container {
                 grid-template-columns: 1fr 1fr;
             }
+
+            #products-container.error {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (min-width: 768px) {
             #products-container {
                 grid-template-columns: 1fr 1fr 1fr;
                 max-width: 1080px;
+            }
+            #products-container.error {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -112,55 +129,85 @@
         <div class="subhead-container">
             <h2>Products</h2>
         </div>
-        <section id="products-container">
-            <!-- TODO: Replace hardcoded articles with JS generated articles -->
-            <article>
-                <p class="category">lorem</p>
-                <h3>ipsum</h3>
-                <section class="price-container">
-                    <p class="sale">$1.99</p>
-                    <p class="price">$4.99</p>
-                </section>
-            </article>
-            <article>
-                <p class="category">loerm</p>
-                <h3>ipsum</h3>
-                <p class="price">$4.99</p>
-                <p class="sale">$1.99</p>
-            </article>
-            <article>
-                <p class="category">loerm</p>
-                <h3>ipsum</h3>
-                <p class="price">$4.99</p>
-                <p class="sale">$1.99</p>
-            </article>
-            <article>
-                <p class="category">loerm</p>
-                <h3>ipsum</h3>
-                <p class="price">$4.99</p>
-                <p class="sale">$1.99</p>
-            </article>
-            <article>
-                <p class="category">loerm</p>
-                <h3>ipsum</h3>
-                <p class="price">$4.99</p>
-                <p class="sale">$1.99</p>
-            </article>
-            <article>
-                <p class="category">loerm</p>
-                <h3>ipsum</h3>
-                <p class="price">$4.99</p>
-                <p class="sale">$1.99</p>
-            </article>
-        </section>
+        <section id="products-container"></section>
     </main>
     <footer>
         <p>A Ross Swanson joint</p>
     </footer>
 </body>
-<script>
-    //TODO: Add script to fetch JSON
 
+<script>
+    const createArticle = (category, productName, price, sale) => {
+        const article = document.createElement('article');
+        
+        const categoryElement = document.createElement('p');
+        categoryElement.classList.add('category');
+        categoryElement.innerText = category;
+
+        const productNameElement = document.createElement('h3');
+        productNameElement.innerText = productName;
+
+        const priceContainerElement = document.createElement('div');
+        priceContainerElement.classList.add('price-container');
+
+        const priceElement = document.createElement('p');
+        priceElement.classList.add('price');
+        const saleElement = document.createElement('p');
+
+        priceElement.innerText = `$${price}`;
+
+        /* 
+        * My Assumption is that sale represents an amount discounted from the price
+        * If sale is the sale price I would instead use: 
+        * saleElement.innerText = `$${sale}`;
+        */
+        saleElement.innerText = `$${(price - sale).toFixed(2)}`;
+
+        priceContainerElement.appendChild(saleElement);
+        priceContainerElement.appendChild(priceElement);
+
+        article.appendChild(categoryElement);
+        article.appendChild(productNameElement);
+        article.appendChild(priceContainerElement);
+
+        return article;
+    }
+
+    const createErrorMessage = () => {
+        const article = document.createElement('article');
+        article.classList.add('error');
+
+        const heading = document.createElement('h3');
+        heading.innerText = "Sorry, something went wrong";
+
+        const errorMessage = document.createElement('p');
+        errorMessage.innerText = "We're working on resolving this issue. Please try again soon.";
+
+        article.appendChild(heading);
+        article.appendChild(errorMessage);
+
+        return article;
+    }
     //TODO: Add script to build article elements
+    const articleContainer = document.getElementById('products-container');
+
+    //TODO: Add script to fetch JSON
+    fetch('https://neodigm.github.io/FED_Programming_Challenge/products.json')
+        .then((response) => response.json())
+        .then((data) => {
+            if(articleContainer.classList.contains('error')) {
+                articleContainer.classList.remove('error')
+            }
+            data.forEach(({cat, product, price, sale}) => {
+                articleContainer.appendChild(createArticle(cat, product, price, sale));
+                //console.log(product);
+            });
+        })
+        .catch((error) => {
+            articleContainer.classList.add('error');
+            articleContainer.appendChild(createErrorMessage());
+        })
+
+
 </script>
 </html>
