@@ -5,8 +5,102 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ross Swanson | Front End Developer Programming Challenge</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
     <style>
         /* TODO: Add styles */
+        html, body, *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        h1, h3 {
+            font-family: 'DM Serif Display', serif;
+            color: #37455a;
+        }
+        
+        h2,p {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 300;
+            color: #37455a;
+        }
+
+        body{
+            width: 100vw;
+            position: relative;
+            min-height: 100vh;
+            background: #FFF
+        }
+
+        header,
+        footer {
+            text-align: center;
+            width: 100vw;
+            padding: 20px;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 0;
+            background-color: #EEE;
+        }
+        
+        .subhead-container {
+            background-color: #f75763;
+            text-align: center;
+            padding: 10px 15px;
+        }
+        .subhead-container h2 {
+            color: #FFF;
+            letter-spacing: 1.2px;
+            font-weight: 400;
+            font-size: 18px;
+        }
+
+        #products-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin: 0 auto;
+        }
+
+        #products-container article {
+            width: 100%;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: center;
+        }
+
+        .price-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .price-container .price {
+            color: #8f8f8f;
+            text-decoration: line-through;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+
+
+        @media (min-width: 450px) {
+            #products-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (min-width: 768px) {
+            #products-container {
+                grid-template-columns: 1fr 1fr 1fr;
+                max-width: 1080px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -15,14 +109,18 @@
         <p class="subhead">Buy my stuff!</p>
     </header>
     <main>
-        <h2>Products</h2>
+        <div class="subhead-container">
+            <h2>Products</h2>
+        </div>
         <section id="products-container">
             <!-- TODO: Replace hardcoded articles with JS generated articles -->
             <article>
-                <p class="category">loerm</p>
+                <p class="category">lorem</p>
                 <h3>ipsum</h3>
-                <p class="price">$4.99</p>
-                <p class="sale">$1.99</p>
+                <section class="price-container">
+                    <p class="sale">$1.99</p>
+                    <p class="price">$4.99</p>
+                </section>
             </article>
             <article>
                 <p class="category">loerm</p>
