@@ -6,13 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ross Swanson | Front End Developer Programming Challenge</title>
     <meta name="description" content="Ross Swanson's programming challenge for ForYourParty.com">
-    <meta name="robots" content="noindex, nofollow">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
     <style>
-        /* TODO: Add styles */
         html, body, *, *::before, *::after {
             margin: 0;
             padding: 0;
@@ -69,7 +67,7 @@
             display: grid;
             grid-template-columns: 1fr;
             gap: 10px;
-            padding: 40px 0 140px 0;
+            padding: 40px 0 160px 0;
             margin: 0 auto;
         }
 
@@ -114,7 +112,7 @@
         }
 
         footer p {
-            margin-top: 5px;
+            margin-top: 15px;
         }
 
         footer a {
@@ -163,7 +161,7 @@
 </body>
 
 <script>
-    const createArticle = (category, productName, price, sale) => {
+    const createProductCard = (category, productName, price, sale) => {
         const article = document.createElement('article');
         
         const categoryElement = document.createElement('p');
@@ -214,24 +212,22 @@
 
         return article;
     }
-    //TODO: Add script to build article elements
-    const articleContainer = document.getElementById('products-container');
 
-    //TODO: Add script to fetch JSON
+    const productContainer = document.getElementById('products-container');
+
     fetch('https://neodigm.github.io/FED_Programming_Challenge/products.json')
         .then((response) => response.json())
         .then((data) => {
-            if(articleContainer.classList.contains('error')) {
-                articleContainer.classList.remove('error')
+            if(productContainer.classList.contains('error')) {
+                productContainer.classList.remove('error')
             }
             data.forEach(({cat, product, price, sale}) => {
-                articleContainer.appendChild(createArticle(cat, product, price, sale));
-                //console.log(product);
+                productContainer.appendChild(createProductCard(cat, product, price, sale));
             });
         })
         .catch((error) => {
-            articleContainer.classList.add('error');
-            articleContainer.appendChild(createErrorMessage());
+            productContainer.classList.add('error');
+            productContainer.appendChild(createErrorMessage());
         })
 
 
