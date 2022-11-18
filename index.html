@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ross Swanson | Front End Developer Programming Challenge</title>
+    <meta name="description" content="Ross Swanson's programming challenge for ForYourParty.com">
+    <meta name="robots" content="noindex, nofollow">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -42,10 +44,13 @@
             padding: 20px;
         }
 
-        footer {
-            position: absolute;
-            bottom: 0;
-            background-color: #EEE;
+        header h1 {
+            margin-top: 15px;
+        }
+
+        header p {
+            margin-top: 15px;
+            margin-bottom: 15px;
         }
         
         .subhead-container {
@@ -64,7 +69,7 @@
             display: grid;
             grid-template-columns: 1fr;
             gap: 10px;
-            padding: 40px 0 100px 0;
+            padding: 40px 0 140px 0;
             margin: 0 auto;
         }
 
@@ -98,6 +103,25 @@
             margin-left: 10px;
         }
 
+        footer {
+            position: absolute;
+            bottom: 0;
+            background-color: #EEE;
+        }
+
+        footer h3 {
+            font-size: 16px;
+        }
+
+        footer p {
+            margin-top: 5px;
+        }
+
+        footer a {
+            color: #37455a;
+            text-decoration: none;
+        }
+
 
         @media (min-width: 450px) {
             #products-container {
@@ -109,7 +133,7 @@
             }
         }
 
-        @media (min-width: 768px) {
+        @media (min-width: 1024px) {
             #products-container {
                 grid-template-columns: 1fr 1fr 1fr;
                 max-width: 1080px;
@@ -122,8 +146,8 @@
 </head>
 <body>
     <header>
-        <h1>Ross Swanson's Store</h1>
-        <p class="subhead">Buy my stuff!</p>
+        <h1>Ross's Programming Challenge</h1>
+        <p class="subhead">Thank you for your consideration. I'm looking forward to your feedback.</p>
     </header>
     <main>
         <div class="subhead-container">
@@ -132,7 +156,9 @@
         <section id="products-container"></section>
     </main>
     <footer>
-        <p>A Ross Swanson joint</p>
+        <h2>Contact us</h2>
+        <p><a href="mailto:ross.a.swanson@gmail.com" title="email Ross">ross.a.swanson@gmail.com</a></p>
+        <p><a href="https://www.linkedin.com/in/raswanson" title="Ross's Linkedin">linkedin</a></p>
     </footer>
 </body>
 
